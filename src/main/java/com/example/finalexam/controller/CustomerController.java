@@ -75,7 +75,7 @@ public class CustomerController {
     }
 
     // handle edit submit
-    @PostMapping("/edit/{id}/")
+    @PostMapping("/edit/{id}")
     public String editCustomer(@PathVariable Long id, @ModelAttribute Customer customer) {
 
         customer.setCustomerNumber(id);

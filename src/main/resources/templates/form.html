@@ -2,18 +2,22 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Customer Form</title>
 </head>
 <body>
 
 <h1 th:text="${customer.customerNumber} == null ? 'Add Customer' : 'Edit Customer'"></h1>
 
-<form th:action="${customer.customerNumber} == null ? '/add' : '/edit/' + customer.customerNumber"
-      th:object="${customer}" method="post">
+<form th:action="${customer.customerNumber == null ? '/add' : '/edit/' + customer.customerNumber}"
+      th:object="${customer}"
+      method="post">
 
     <div>
         <label>Customer Number:</label>
-        <input type="number" th:field="*{customerNumber}" th:disabled="${customer.customerNumber} != null" required/>
+        <input type="number"
+               th:field="*{customerNumber}"
+               th:disabled="${customer.customerNumber} != null"
+               required/>
     </div>
 
     <div>
