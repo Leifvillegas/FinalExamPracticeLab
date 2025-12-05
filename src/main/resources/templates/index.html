@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Savings</title>
+</head>
+<body>
+
+<h1>Savings investment record</h1>
+
+<!-- error message (duplicate customer, etc.) -->
+<div th:if="${errorMessage}" id="errorBox" style="color:red;">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Customer #</th>
+        <th>Name</th>
+        <th>Initial Deposit</th>
+        <th>Years</th>
+        <th>Savings Type</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${customers}">
+        <td th:text="${c.customerNumber}"></td>
+        <td th:text="${c.name}"></td>
+        <td th:text="${c.initialDeposit}"></td>
+        <td th:text="${c.years}"></td>
+        <td th:text="${c.savingsType}"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${c.customerNumber}}">Edit</a>
+
+            <form th:action="@{'/delete/' + ${c.customerNumber}}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                <button type="submit">Delete</button>
+            </form>
+
+            <a th:href="@{'/project/' + ${c.customerNumber}}">Projected Investment</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/add">Add</a>
+
+<script>
+    //hide message after 3 sseconds
+    window.onload = function () {
+
+        const errorBox = document.getElementById('errorBox');
+        if (errorBox) {
+
+            setTimeout(function () {
+
+                errorBox.style.display = 'none';
+
+            }, 3000);
+
+        }
+
+    }
+</script>
+
+</body>
+</html>

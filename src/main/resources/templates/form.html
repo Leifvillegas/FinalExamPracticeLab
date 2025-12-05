@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1 th:text="${customer.customerNumber} == null ? 'Add Customer' : 'Edit Customer'"></h1>
+
+<form th:action="${customer.customerNumber} == null ? '/add' : '/edit/' + customer.customerNumber"
+      th:object="${customer}" method="post">
+
+    <div>
+        <label>Customer Number:</label>
+        <input type="number" th:field="*{customerNumber}" th:disabled="${customer.customerNumber} != null" required/>
+    </div>
+
+    <div>
+        <label>Name:</label>
+        <input type="text" th:field="*{name}" required/>
+    </div>
+
+    <div>
+        <label>Initial Deposit:</label>
+        <input type="number" step="0.01" th:field="*{initialDeposit}" required/>
+    </div>
+
+    <div>
+        <label>Number of Years:</label>
+        <input type="number" th:field="*{years}" min="1" required/>
+    </div>
+
+    <div>
+        <label>Type of Savings:</label>
+        <select th:field="*{savingsType}">
+            <option value="REGULAR">Savings Regular (10%)</option>
+            <option value="DE_LUXE">Savings De-luxe (15%)</option>
+        </select>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+<br>
+<a href="/">Back to Main</a>
+
+</body>
+</html>

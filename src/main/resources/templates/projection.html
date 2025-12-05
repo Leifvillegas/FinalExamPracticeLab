@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projected Investment</title>
+</head>
+<body>
+
+<h1>Projected Investment</h1>
+
+<p>
+    Customer #
+    <span th:text="${customer.customerNumber}"></span> -
+    <span th:text="${customer.name}"></span>
+</p>
+
+<p>
+    Initial Deposit:
+    <span th:text="${customer.initialDeposit}"></span><br/>
+    Years:
+    <span th:text="${customer.years}"></span><br/>
+    Savings Type:
+    <span th:text="${customer.savingsType}"></span>
+</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Year</th>
+        <th>Ending Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="amount, iterStat : ${projection}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${#numbers.formatDecimal(amount, 1, 'POINT', 2, 'NONE')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<form action="/" method="get">
+    <button type="submit">Back to Main</button>
+</form>
+
+</body>
+</html>
